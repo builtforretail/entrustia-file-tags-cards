@@ -35,6 +35,29 @@
       :key="item.id"
       class="eft-card"
     >
+      <div class="eft-card-actions">
+        <button
+          class="eft-btn-open"
+          :style="getOpenButtonStyle(item.id)"
+          @click="handleOpenClick(item)"
+          @mouseenter="setHover('open', item.id, true)"
+          @mouseleave="setHover('open', item.id, false)"
+          @mousedown="setActive('open', item.id, true)"
+          @mouseup="setActive('open', item.id, false)"
+          type="button"
+        >Open</button>
+        <button
+          class="eft-btn-edit"
+          :style="getEditButtonStyle(item.id)"
+          @click="handleEditClick(item)"
+          @mouseenter="setHover('edit', item.id, true)"
+          @mouseleave="setHover('edit', item.id, false)"
+          @mousedown="setActive('edit', item.id, true)"
+          @mouseup="setActive('edit', item.id, false)"
+          type="button"
+        >Edit</button>
+      </div>
+
       <div class="eft-card-row">
         <span class="eft-label">File Name</span>
         <span
@@ -71,29 +94,6 @@
       <div class="eft-card-row">
         <span class="eft-label">File Size</span>
         <span class="eft-value">{{ formatSize(item.size_bytes) }}</span>
-      </div>
-
-      <div class="eft-card-actions">
-        <button
-          class="eft-btn-open"
-          :style="getOpenButtonStyle(item.id)"
-          @click="handleOpenClick(item)"
-          @mouseenter="setHover('open', item.id, true)"
-          @mouseleave="setHover('open', item.id, false)"
-          @mousedown="setActive('open', item.id, true)"
-          @mouseup="setActive('open', item.id, false)"
-          type="button"
-        >Open</button>
-        <button
-          class="eft-btn-edit"
-          :style="getEditButtonStyle(item.id)"
-          @click="handleEditClick(item)"
-          @mouseenter="setHover('edit', item.id, true)"
-          @mouseleave="setHover('edit', item.id, false)"
-          @mousedown="setActive('edit', item.id, true)"
-          @mouseup="setActive('edit', item.id, false)"
-          type="button"
-        >Edit</button>
       </div>
     </div>
 
@@ -480,6 +480,13 @@ export default {
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
+.eft-card-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+  justify-content: flex-start;
+}
+
 .eft-card-row {
   display: flex;
   justify-content: space-between;
@@ -496,9 +503,7 @@ export default {
 .eft-label {
   font-weight: 600;
   color: #6b7280;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
+  font-size: 13px;
   white-space: nowrap;
   padding-top: 2px;
   min-width: 90px;
@@ -539,17 +544,10 @@ export default {
   color: #9ca3af;
 }
 
-.eft-card-actions {
-  display: flex;
-  gap: 8px;
-  margin-top: 10px;
-  justify-content: flex-end;
-}
-
 .eft-btn-open,
 .eft-btn-edit {
-  padding: 6px 16px;
-  border-radius: 6px;
+  padding: 5px 16px;
+  border-radius: 999px;
   border: 1.5px solid;
   font-size: 13px;
   font-weight: 500;
